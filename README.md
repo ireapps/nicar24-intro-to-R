@@ -17,10 +17,3 @@ Learning a programming language requires some investment of time. We're going to
 3. Use R to sort, filter, group, summarize, and join your data tables. 
 4. Get a glimpse of R's additional power when it comes to data cleaning and graphing. 
 5. Leave with resources to learn more and troubleshoot problems.
-
-### Data and Script Files
-All the data we'll use in this class in the `data` folder. All notebook files (.Rmd) are in the `scripts` folder. We'll go through them in this order: 
-
-1. [Importing-and-intro-to-data-analysis.Rmd](scripts/Importing-and-intro-to-data-analysis.Rmd)
-2. [Finding-the-story-in-salaries-data.Rmd](scripts/Finding-the-story-in-salaries-data.Rmd)
-3. [Next-steps-in-R.Rmd](scripts/Next-steps-in-R.Rmd)
