@@ -24,14 +24,14 @@ print(x)
 
 In notebook files, the results of the code in each code chunk will print below the chunk, allowing you to quickly see the results of your work. The utility of this will be apparent when we start asking questions of data.
 
-You create a code chunk by typing `cmd+option+i` and you write your `code` in between the first and last lines of the code chunk. All your comments, questions, thoughts, and notes are written outside of the code chunks. The comments outside of code chunks use markdown for formatting. Markdown is similar to html, but if you don't know it, don't worry about it for now.
+You create a code chunk by typing `ctrl+alt+i` (`cmd+option+i` on a Mac) and you write your `code` in between the first and last lines of the code chunk. All your comments, questions, thoughts, and notes are written outside of the code chunks. The comments outside of code chunks use markdown for formatting. Markdown is similar to html, but if you don't know it, don't worry about it for now.
 
 ### Part Two: Terminology
 
 Some important terminology has come up already:
 
 -   **Notebook**: a certain type of R script that allows us to write whatever text we want, including `code` inside of code chunks
--   **code chunk**: created by typing `cmd+option+i`, type your code inside code chunks.
+-   **code chunk**: created by typing `ctrl+alt+i` (on a PC), type your code inside code chunks.
 -   **environment**: this is basically your workspace for every R session. It's empty until you start storing information in variables.
 -   **variable**: a variable is a container that holds something. For example, the following code stores the word "spaghetti" into a variable named "x", using the assignment operator `<-`, and then prints the contents of that variable to the console below the code chunk:
 
@@ -81,7 +81,7 @@ sum(x,y)
 
 -   **package**: a set of features and functions that are not a part of base R (what you initially installed), but that you can add to R to increase its functionality. You install packages once by using the `install.packages()` function. Then every time you want to use a package (such as tidyverse) in your script, you load it into your environment using the `library()` function. All the necessary packages for this class have already been installed.
 
--   **pipe**: a pipe does what it sounds like: it pipes information from one function to the next. It is a part of the [tidyverse](https://www.tidyverse.org/) **package**, which is the primary set of tools we use for data analysis in R. You will use the pipe a lot, and it looks like this: `%>%`. A shortcut for typing it is `cmd+shift+m`(or `ctrl+shift+m`).
+-   **pipe**: a pipe does what it sounds like: it pipes information from one function to the next. It is a part of the [tidyverse](https://www.tidyverse.org/) **package**, which is the primary set of tools we use for data analysis in R. You will use the pipe a lot, and it looks like this: `%>%`. A shortcut for typing it is `ctrl+shift+m`.
 
 
 ### Part Three: The key to understanding programming...
@@ -94,6 +94,6 @@ Additionally, data can be passed (or **piped**) through functions that filter, s
 
 Using the Files pane in the lower-right quadrant, click once on the `scripts` folder and then on the filename `R-Basics.Rmd`. It should open in the upper-left quadrant.
 
-Some of the code is already written out. You can run it by clicking the green "play" button in the upper-right corner of a code chunk. You can also run individual lines of code in a code chunk by putting your cursor on that line and typing `cmd + return` (or `ctrl + enter` on a PC).
+Some of the code is already written out. You can run it by clicking the green "play" button in the upper-right corner of a code chunk. You can also run individual lines of code in a code chunk by putting your cursor on that line and typing `ctrl+enter`.
 
 You will also have the chance to type your own code.
