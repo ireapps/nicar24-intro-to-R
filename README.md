@@ -1,4 +1,6 @@
 # Introduction to R
+
+### [**bit.ly/nicar24-introR**](https://bit.ly/nicar24-introR)
 ###### _Learn the basics of analyzing data with R, a powerful and versatile open standard language_
 ### Class Requirements
 - This material will make sense if you have a good understanding of the basics of data analysis: sorting, filtering and grouping, whether in spreadsheets or in a database manager program.
