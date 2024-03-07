@@ -20,6 +20,10 @@ Learning a programming language requires some investment of time. We're going to
 4. Get a glimpse of R's additional power when it comes to data cleaning and graphing. 
 5. Leave with resources to learn more and troubleshoot problems.
 
+### Data
+Almost all the data we'll use is in the [data](data) folder (where you should always keep data!)
+The one exception is the [NYC Squirrel Census](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data)
+
 ### Additional Materials
 - [Peruse the RStudio Cheatsheets](rstudio_cheatsheets)
 - [Review the primary functions for data analysis](tipsheets/R-Functions.pdf)
