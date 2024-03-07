@@ -1,6 +1,8 @@
 # Annoying DS Store files
 .DS_Store
 
+scripts/nicar_scripts.R
+
 # History files
 .Rhistory
 .Rapp.history
@@ -40,4 +42,4 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-scripts/nicar_scripts.R
+
