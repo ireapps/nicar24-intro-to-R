@@ -22,6 +22,6 @@ Learning a programming language requires some investment of time. We're going to
 
 ### Additional Materials
 - [Peruse the RStudio Cheatsheets](rstudio_cheatsheets)
-- [Review the primary functions for data analysis](tipsheets/R-Functions.html)
+- [Review the primary functions for data analysis](tipsheets/R-Functions.pdf)
 - [Review basic newsroom math formulas](tipsheets/Newsroom-Math-Crib-Sheet.pdf) (h/t Steve Doig)
 - [See the various types of joins you can do in R](https://docs.google.com/presentation/d/1CbQiwMVWIgzh5dsNQQE76MTLhFaxqXvAJMyDFA5n0SU/edit?usp=sharing)
