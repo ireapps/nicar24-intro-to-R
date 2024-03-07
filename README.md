@@ -19,3 +19,9 @@ Learning a programming language requires some investment of time. We're going to
 3. Use R to sort, filter, group, summarize, and join your data tables. 
 4. Get a glimpse of R's additional power when it comes to data cleaning and graphing. 
 5. Leave with resources to learn more and troubleshoot problems.
+
+### Additional Materials
+- [Peruse the RStudio Cheatsheets](rstudio_cheatsheets)
+- [Review the primary functions for data analysis](tipsheets/R-Functions-tipsheet.pdf)
+- [Review basic newsroom math formulas](tipsheets/Newsroom-Math-Crib-Sheet.pdf) (h/t Steve Doig)
+- [See the various types of joins you can do in R](https://docs.google.com/presentation/d/1CbQiwMVWIgzh5dsNQQE76MTLhFaxqXvAJMyDFA5n0SU/edit?usp=sharing)
