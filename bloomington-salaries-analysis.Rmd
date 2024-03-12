@@ -1,0 +1,95 @@
+---
+title: "R Notebook"
+output: 
+---
+
+It's always best practice to have a code chunk at the top of your script where you load packages. Technically once you load a package into an RStudio session you don't need to do it again unless you quit RStudio and open it up again. BUT you always want to know what packages your script relies on, so write the library() functions even if you don't need to run them. 
+
+This time we're adding a package called `readxl` that allows us to import directly from Excel spreadsheets. To install this package, run 
+```{r}
+install.packages("readxl")
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+A word about documentation: every function in R has a lot more functionality that you can tap into by using additional arguments. Take read_csv() for example: you can change column names, enforce certain data types, skip rows, all by additional additional arguments to the function. To find out what arguments are available, you need to read the documentation. Run ?function_name to see the documentation for any function. You must load the package before you do this.
+
+The function we'll use to import spreadsheets is read_excel():
+```{r}
+?read_excel
+```
+
+The read_excel() function has many possible arguments, only one is *required*: path. You can tell it is required because it is not followed by an =. The rest all have = and the default setting, which is why they are optional. For example, by default "sheet = NULL" means that read_excel will read in the first tab of your spreadsheet. "col_names = TRUE" means that R assumes the first row is column headers. All of this is explained further down in the documentation under the *Argumens* heading. 
+
+Using this function you can import a particular sheet, or choose a range of cells to import. The data we want is called "Bloomington Salaries.xlsx" in the data folder; the data is in the first of two tabs, but we'll specify which sheet we want just for the practice:
+```{r}
+salaries <- read_excel("data/Bloomington Salaries.xlsx", sheet=1)
+```
+
+To warm up, find out which employee of the Bloomington, Indiana city government made the most in overtime (the column is *overtime_oncall*). In this dataset, one row is one employee. So to find the employee with the largest number in *overtime_oncall*, we just need to sort the data by that column in descending order:
+```{r}
+salaries %>% arrange(desc(overtime_oncall))
+```
+
+Jeffrey Rodgers of the Police Department made over $41K in overtime. Is the PD the department that pays out the most in overtime? 
+
+To answer this question, we are changing our unit of analysis from individual employees to departments; we need to put employees into groups based on what department they work for: grouping! A good rule of thumb: when you use group_by(), 99% of the time you want to follow it with summarise():
+```{r}
+salaries %>% 
+  group_by(department) %>% 
+  summarise(total_OT = sum(overtime_oncall)) %>% 
+  arrange(desc(total_OT))
+```
+
+This returns NA for every department because this dataset has NULLs in it: NA is a null value in R. If you try to add a number and NA, you'll always get NA. So we need to exclude those from the sum() by adding an optional argument: `na.rm=T` which means "remove NAs is TRUE":
+```{r}
+salaries %>% 
+  group_by(department) %>% 
+  summarise(total_OT = sum(overtime_oncall, na.rm=T)) %>% 
+  arrange(desc(total_OT))
+```
+Yep, the Police Department has spent the most in overtime of any other department, to the tune of almost $750K. 
+
+## mutate() ##
+
+But the police department probably has a big budget and a lot of individuals. How can we make a fairer comparison? 
+
+We can start with Jeffrey Rodgers: he made the most in OT in raw numbers, but what about as a percent of his salary? If you're familiar with spreadsheets, you would go to the first blank column to the right of your table and type in the formula to calculate percent of the whole (part/whole). In R, we do that using mutate(): 
+
+```{r}
+salaries %>% 
+  mutate(pct_OT = overtime_oncall/total_comp)
+
+# pct_OT is the header for the column we are creating here; it will be populated with the values from the formula overtime_oncall/total_comp. Where overtime_oncall is NA, pct_OT will be NA (which makes sense here). 
+
+# to make this column permanent in our `salaries` variable, we need to use <-
+salaries <- salaries %>% 
+  mutate(pct_OT = overtime_oncall/total_comp)
+```
+
+When using mutate, it's always a good idea to test it first before you overwrite your data variable. 
+
+Now, who has the overtime as the largest percent of their total compensation? 
+```{r}
+salaries %>% 
+  arrange(desc(pct_OT))
+
+# still Jeffrey Rodgers
+```
+
+We can also use mutate() on the fly, on aggregate tables we create temporarily. For example, if we want to examine which department spends the highest percentage of overtime, we need to group our data by department, calculate some totals, and then use mutate to calculate percentage (remember that overtime_oncall has NAs in it): 
+```{r}
+salaries %>% 
+  group_by(department) %>% 
+  summarise(tot_comp = sum(total_comp), tot_OT = sum(overtime_oncall, na.rm=T)) %>% 
+  mutate(pct_OT = tot_OT / tot_comp) %>% 
+  arrange(desc(pct_OT))
+
+# if you're getting scientific notation (numbers that end with e and a positive or negative two digit number), use the following command: 
+options(scipen=999)
+```
+
+If you're interested in learning how to join tables, go to tidyverse-joins.Rmd.

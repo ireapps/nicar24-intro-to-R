@@ -1,0 +1,44 @@
+---
+title: "First R Notebook"
+output: 
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, you will always do it within a code chunk (which appears as gray space). When you run code in code chunks, the results appear beneath the chunk, unless you save them into a variable using `<-`. 
+
+You can run all the code in the code chunk by clicking the *Run* button in the upper right corner of each chunk, or by placing your cursor inside the code and pressing *Cmd+Enter* (or *Ctrl+Enter* on a PC). 
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I* (or *Ctrl+Alt+I* on a PC).
+
+This is our first code chunk! We're going to create several very simple variables to practice assigning values to variables, which are containers that we put information into. They are the objects, or nouns, of coding in R. 
+Text values, such as "apple", need to be in double quotes. Numbers do not (much like SQL). Variables are usually referred to without quotes. 
+
+```{r}
+# Save the value "apple" into a variable called `a`. Run the code by putting your cursor somewhere in it and pressing `cmd+enter` (or `ctrl+enter` on a PC):
+a <- "apple"
+
+# Save the value 3 into a variable called `b`:
+b <- 3
+
+# Save the value 4 into a variable called `c`:
+c <- 4
+```
+
+If we have run the above code, these variables should show up in your environment in the upper right pane. When we start working with data, you will also store full tables of data into variables. See the Introduction-to-R.html document for a guide to naming variables in R (there are rules). 
+
+Once we have objects in R, let's talk about functions. These are the actions we'll take on variables to manipulate, clean, analyze, and graph data. 
+
+Starting with a very simple function, sum(), which is part of base R. The sum function's arguments (the things that go inside th parentheses) are simple numbers to sum. So sum up the numbers in variables `b` and `c`:
+```{r}
+sum(b,c)
+```
+
+Running that code should return the number 7 below your code chunk. You can also save it into another variable: 
+
+```{r}
+bc <- sum(b,c)
+```
+
+R was created as a statistical language so it has many built-in functions for calculating statistics, including basic descriptive statistics such as sum(), mean(), median() and range(). Generally speaking, summary functions are aggregate functions: they take multiple numbers and return one number. 
+
+Now that we've practiced writing some code and working with some simple variables, let's get to importing and analyzing some real data. Go to analysis-in-tidyverse.Rmd
+

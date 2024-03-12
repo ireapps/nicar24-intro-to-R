@@ -17,12 +17,18 @@ Learning a programming language requires some investment of time. We're going to
 1. Learn how to set things up to make working with R easy and efficient: we'll use R Project files (.RProj) and talk about a standard folder structure for every project.
 2. Import a CSV, an excel file, and some data from the web.
 3. Use R to sort, filter, group, summarize, and join your data tables. 
-4. Get a glimpse of R's additional power when it comes to data cleaning and graphing. 
-5. Leave with resources to learn more and troubleshoot problems.
+4. Leave with resources to learn more and troubleshoot problems.
+
+### Scripts
+1. [Introduction-to-R.html](Introduction-to-R.html) (explains set up and basic terminology)
+2. [first-r-notebook.Rmd](first-r-notebook.Rmd) (start here to practice working in notebooks)
+3. [analysis-in-tidyverse.Rmd](analysis-in-tidyverse.Rmd) (explains the main tidyverse functions we use for analysis)
+4. [bloomington-salaries-analysis.Rmd](bloomingtons-salaries-analysis.Rmd) (practice tidyverse functions, create new columns)
+5. [tidyverse-joins.Rmd](tidyverse-joins.Rmd) (learn how to join tables)
+6. [wnba-exercise-answers.Rmd](wnba-exercise-answers.Rmd) (code to answer the practice questions at the bottom of tidyverse-joins.Rmd)
 
 ### Data
-Almost all the data we'll use is in the [data](data) folder (where you should always keep data!)
-The one exception is the [NYC Squirrel Census](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data)
+All the data we'll use is in the [data](data) folder (where you should always keep data!)
 
 ### Additional Materials
 - [Peruse the RStudio Cheatsheets](rstudio_cheatsheets)

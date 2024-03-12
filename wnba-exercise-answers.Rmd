@@ -1,0 +1,70 @@
+---
+title: "R Notebook"
+output: 
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+wnba_salaries <- read_csv("data/wnba_salaries.csv")
+wnba_teams <- read_csv("data/wnba_teams.csv")
+```
+
+Answers to the following questions from tidyverse-joins.Rmd:
+
+1.  Who was the tallest player in the WNBA in 2023?
+
+```{r}
+wnba_teams %>% arrange(desc(height_in))
+```
+
+2.  Which team has the most players shooting better than 50%?
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name")) %>% 
+  filter(field_goal_pct > .5) %>% 
+  count(team) %>% 
+  arrange(desc(n))
+```
+
+3.  Which college has produced the most current WNBA players?
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name")) %>% 
+  count(college) %>% 
+  arrange(desc(n))
+```
+
+4.  Which college has produced players with the highest average salary?
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name")) %>% 
+  group_by(college) %>% 
+  summarise(avg_sal = mean(contract_amt, na.rm=T)) %>% 
+  arrange(desc(avg_sal))
+```
+
+5.  What percent of WNBA players are not from the US?
+
+```{r}
+wnba_teams %>% 
+  filter(country != "USA") %>% 
+  count()/162
+```
+
+6.  How many players from the 2023 draft started the majority of their games?
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name")) %>% 
+  filter(draft_year==2023) %>% 
+  mutate(pct_start = games_start/games) %>% 
+  select(name, team, games, pct_start) %>% 
+  arrange(desc(pct_start))
+```
+

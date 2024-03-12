@@ -1,0 +1,116 @@
+---
+title: "Tidyverse joins"
+output: 
+---
+
+Joins are a very valuable tools; many datasets are kept as relational tables which require joins to fully analyze. Data journalists also use joins to analyze completely different datasets and look for overlap: for example, school bus drivers and registered sex offenders.
+
+To do any kind of join, you need to have a column or columns in your tables that contain the EXACT same information. When working with data that is housed in relational tables, this is usually intuitive and the columns match exactly because the data tables were designed to be joined. If you're doing enterprise joins (two completely unrelated datasets), this takes more work that we won't cover here.
+
+There are several types of joins you can perform in R, and each returns a slightly different set of results. Regardless of which join function you choose, the arguments will be the same. To learn more about the different kinds of joins, check out [this presentation](https://docs.google.com/presentation/d/1CbQiwMVWIgzh5dsNQQE76MTLhFaxqXvAJMyDFA5n0SU/edit?usp=sharing). The last slide also talks about syntax.
+
+```{r}
+library(tidyverse)
+```
+
+To practice joins, we'll use two tables of information about WNBA players during the 2023 season. One table (*wnba_salaries.csv*) comes from [Her Hoop Stats](https://herhoopstats.com/) and the other (*wnba_teams.csv*) comes from [ESPN](https://www.espn.com/wnba/).
+
+```{r}
+wnba_salaries <- read_csv("data/wnba_salaries.csv")
+wnba_teams <- read_csv("data/wnba_teams.csv")
+```
+
+These two tables have a different row count, so they don't match exactly. We'll start with an inner join (which only returns matches from both tables) to see how many they have in common.
+
+Take a look at each table: what columns do they have in common? The only information they share in player name. Full disclosure: I had to clean up these columns to make sure that they matched exactly so that the join would work.
+
+The syntax:
+
+-   Inside the join function you list table x, table y, and then using the argument `by` state which columns are the same.
+-   If the columns have the same name, you can say `by = "column_name"`.
+-   If they are named differently you need to set one name equal to the other inside the `c()` function (which creates a vector). That's just how the function was written.
+-   The column name in table x, wnba_salaries, is "name" and the column name in table y, wnba_teams, is "player_name".
+-   This is one of those few examples where column names have double quotes.
+
+```{r}
+inner_join(wnba_salaries, wnba_teams, by = c("name"="player_name"))
+```
+
+Look at the results. All the columns from table x (wnba_salaries) are listed on the left, followed by all the columns from table y (wnba_teams). The join excludes the second instance of the join column, in this case "player_name" from wnba_teams.
+
+You can also perform this join using the pipe character `%>%`. When using the pipe, whatever you're piping into a function always takes the place of the first argument. By piping wnba_salaries into the inner_join() function, it automatically takes the place of `x`:
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name"))
+```
+
+Note there are 161 rows returned, so each table has players that aren't in the other table. We'll get to those in a bit.
+
+Now you can use the joined data to analyze all the information about WNBA players, such as: which team has the highest average salary?
+
+```{r}
+wnba_salaries %>% 
+  inner_join(wnba_teams, by = c("name"="player_name")) %>% 
+  group_by(team) %>% 
+  summarise(avg_sal = mean(contract_amt, na.rm=T)) %>% 
+  arrange(desc(avg_sal))
+```
+
+You can perform the join every time you ask a question of the data, or you can store the joined information into a new variable. You can even write it out to a CSV using `write_csv()`.
+
+```{r}
+wnba_joined <- inner_join(wnba_salaries, wnba_teams, by = c("name"="player_name"))
+
+# write the environment variable wnba_joined to a csv in your data folder called wnba_joined.csv. This file is created by the function. 
+write_csv(wnba_joined, "data/wnba_joined.csv")
+```
+
+How do the average and median salaries compare by team?
+
+```{r}
+wnba_joined %>% 
+  group_by(team) %>% 
+  summarise(avg_sal = mean(contract_amt, na.rm=T), med_sal = median(contract_amt, na.rm=T)) %>% 
+  arrange(desc(avg_sal))
+
+# there are definitely some outliers on most teams
+```
+
+So which players are missing from each table? To determine this, use the very useful anti_join(), which returns only rows from table x that have no match in table y.
+
+So which players in wnba_salaries are missing from wnba_teams?
+
+```{r}
+wnba_salaries %>% 
+  anti_join(wnba_teams, by = c("name"="player_name"))
+
+# two players: Isabelle Harrison and Lou Lopez Senechal 
+```
+
+Which players in wnba_teams are missing from wnba_salaries? Note that we're just switching around which table is x and which is y, and swapping the column names accordingly:
+
+```{r}
+wnba_teams %>% 
+  anti_join(wnba_salaries, by = c("player_name" = "name"))
+
+# One player, AD Durr
+```
+
+We'd have to do some sleuthing and potentially some reporting around why there are players missing from both tables.
+
+Now that we've joined these tables, try to answer the following questions:
+
+1.  Who was the tallest player in the WNBA in 2023?
+
+2.  Which team has the most players shooting better than 50%?
+
+3.  Which college has produced the most current WNBA players?
+
+4.  Which college has produced players with the highest average salary?
+
+5.  What percent of WNBA players are not from the US?
+
+6.  How many players from the 2023 draft started the majority of their games?
+
+To see the answers, to go wnba_exercise_answers.Rmd
