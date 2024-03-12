@@ -23,7 +23,7 @@ Learning a programming language requires some investment of time. We're going to
 1. [Introduction-to-R.html](Introduction-to-R.html) (explains set up and basic terminology)
 2. [first-r-notebook.Rmd](first-r-notebook.Rmd) (start here to practice working in notebooks)
 3. [analysis-in-tidyverse.Rmd](analysis-in-tidyverse.Rmd) (explains the main tidyverse functions we use for analysis)
-4. [bloomington-salaries-analysis.Rmd](bloomingtons-salaries-analysis.Rmd) (practice tidyverse functions, create new columns)
+4. [bloomington-salaries-analysis.Rmd](bloomington-salaries-analysis.Rmd) (practice tidyverse functions, create new columns)
 5. [tidyverse-joins.Rmd](tidyverse-joins.Rmd) (learn how to join tables)
 6. [wnba-exercise-answers.Rmd](wnba-exercise-answers.Rmd) (code to answer the practice questions at the bottom of tidyverse-joins.Rmd)
 
